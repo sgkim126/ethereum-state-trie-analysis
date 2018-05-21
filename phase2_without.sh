@@ -1,0 +1,5 @@
+python ./prune_without_extension.py "data-without-extension-$1" "data-without-extension-pruned-$1" "$2"
+python ./usage_without_extension.py "data-without-extension-pruned-$1"
+cp -r "data-without-extension-pruned-$1" "data-without-extension-removed-$1"
+python ./remove_without_extension.py data-shuffled-2 "data-without-extension-removed-$1" "$2" "$3"
+python ./usage_without_extension.py "data-without-extension-removed-$1"
