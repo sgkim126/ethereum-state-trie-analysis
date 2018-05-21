@@ -48,6 +48,9 @@ class DbWithCache(object):
     def clear(self):
         self.dirty.clear()
 
+    def reset(self):
+        self.cache.clear()
+
     def commit(self, hash):
         if not hash:
             return
@@ -296,6 +299,8 @@ if __name__ == '__main__':
         cache.commit(root_hash)
         cache.clear()
         assert size == 64, "Size must be 64 but %d" % size
+        if i % 100000 == 0:
+            cache.reset()
         if len(sys.argv) == 4 and i == int(sys.argv[3]):
             break
     print("%d 0x%s" % (i, root_hash.hex()))

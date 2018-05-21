@@ -48,6 +48,9 @@ class DbWithCache(object):
     def clear(self):
         self.dirty.clear()
 
+    def reset(self):
+        self.cache.clear()
+
     def commit(self, hash):
         if not hash:
             return
@@ -241,6 +244,8 @@ if __name__ == '__main__':
         cache.clear()
         if removed:
             number_of_removed += 1
+        if i % 100000 == 0:
+            cache.reset()
         if len(sys.argv) == 5 and i == int(sys.argv[4]):
             break
     print("%d/%d removed 0x%s" % (number_of_removed, i, root_hash.hex()))
